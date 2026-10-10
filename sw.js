@@ -1,8 +1,8 @@
 // Работа без интернета: свои файлы — сначала из сети (свежая версия), без сети — из кэша. Шрифты — из кэша.
-const CACHE = 'english-1.0.0';
-const V = '?v=1.0.0';
+const CACHE = 'english-1.1.0';
+const V = '?v=1.1.0';
 const FILES = ['./', 'index.html', 'manifest.webmanifest', 'icon-512.png'].concat(
-  ['data_words','data_content','course_data','core','lang','course','tab_home','tab_sounds','tab_words','tab_talk','tab_read','tab_rules','tab_stats','main'].map(f => 'js/' + f + '.js' + V));
+  ['data_words','data_content','course_data','course_data2','course_data3','core','lang','course','tab_home','tab_sounds','tab_words','tab_talk','tab_read','tab_rules','tab_stats','main'].map(f => 'js/' + f + '.js' + V));
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES))); self.skipWaiting(); });
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith('english-') && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));

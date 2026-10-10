@@ -27,7 +27,7 @@ function renderHome(){
   const wi = R(wd[0]);
   $('#t-home').innerHTML = voiceWarn() + news + `
   <div class="card"><h2>Hello! Добро пожаловать</h2>
-   <div class="mut">Главное — курс «Разговор на улице»: один урок в день, 30 уроков. Слова повторяйте в карточках, остальные вкладки — дополнительная практика.</div>
+   <div class="mut">Главное — курс «Разговор на улице»: один урок в день, 90 уроков от нуля до уровня B1. Слова повторяйте в карточках, остальные вкладки — дополнительная практика.</div>
    <div style="margin-top:10px"><div class="row" style="justify-content:space-between"><b>Цель дня: ${Math.min(dx,g)} / ${g} очков</b><span class="mut">${dx>=g?'✅ выполнена':''}</span></div>
     <div class="bar" style="margin-top:4px"><i style="width:${Math.min(100,dx/g*100)}%"></i></div>
     <div class="mut" style="margin-top:4px">Уровень ${L.lv} · ${L.cur} / ${L.need} до следующего · всего ${S.xp||0} очков</div></div>

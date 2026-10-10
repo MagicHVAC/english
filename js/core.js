@@ -1,6 +1,11 @@
 'use strict';
-const APP = {ver:'1.1.0', date:'10.10.2026'};
+const APP = {ver:'1.2.0', date:'10.10.2026'};
 const NEWS = [
+ 'Новый современный стиль «Аниме» ✨ (можно вернуть «Классику» в настройках) и раздел «Сленг 🔥» во вкладке «Речь» — так говорят подростки в соцсетях.',
+ 'Курс стал сериалом: «Дедушкина открытка». Каждый урок — новая серия с мини-диалогом, 18 городов на карте путешествия, открытки за пройденные города.',
+ 'Живой помощник радуется верным ответам, комбо за серии верных ответов, конфетти и звуки.',
+ 'Новая вкладка «Игры»: шарики, пары, падающие слова, блиц 60 секунд — с рекордами.',
+ 'Звания, огонёк серии дней, задания дня с сундуком, испытание недели, 36 достижений и коллекция наклеек (в «Прогрессе»).',
  'Курс вырос до 90 уроков: добавлены уровни A2 «Уверенный разговор» (уроки 31–60) и B1 «Свободно» (уроки 61–90).',
  'Новые темы: аэропорт, бронирование, потерянные вещи, возврат покупок, телефон, мессенджеры, спорт, школа, советы, споры, детство, мечты, банк, почта, аллергии, экология, технологии, экстренные ситуации, традиции, этикет, рассказ о России, собеседование, дискуссия.',
  'Первая версия: звуки и правила чтения, 400 слов A1–A2 с транскрипцией, диктант, неправильные глаголы.',
@@ -18,7 +23,7 @@ function load(){ try{ const t=localStorage.getItem(LS); if(t){ const o=JSON.pars
 function save(){ try{ localStorage.setItem(LS, JSON.stringify(S)); }catch(e){} }
 function today(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function dayRec(){ const k=today(); return S.daily[k] || (S.daily[k]={nw:0,rev:0,q:0,qok:0,xp:0}); }
-function addXP(n){ S.xp=(S.xp||0)+n; const r=dayRec(); const before=r.xp||0; r.xp=before+n; save();
+function addXP(n){ S.xp=(S.xp||0)+n; try{ gameOnXP(n); }catch(e){} const r=dayRec(); const before=r.xp||0; r.xp=before+n; save();
   const g=S.settings.goal; if(before<g && r.xp>=g) toast('🎯 Дневная цель выполнена! Well done!', 3000); }
 
 /* ===== УТИЛИТЫ ===== */
@@ -133,7 +138,7 @@ function listen(target, outId){
 }
 
 /* ===== НАВИГАЦИЯ ===== */
-const TABS = {home:()=>renderHome(), sounds:()=>renderSounds(), words:()=>renderWords(), talk:()=>renderTalk(),
+const TABS = {games:()=>renderGames(), home:()=>renderHome(), sounds:()=>renderSounds(), words:()=>renderWords(), talk:()=>renderTalk(),
   read:()=>renderRead(), rules:()=>renderRules(), stats:()=>renderStats()};
 function show(tab){
   stopSay(); TX.length = 0;

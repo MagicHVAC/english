@@ -25,7 +25,7 @@ function renderHome(){
   const news = S.seenVer===APP.ver ? '' : `<div class="card news"><b>Что нового в версии ${APP.ver}</b>
     <ul>${NEWS.map(n=>'<li>'+n+'</li>').join('')}</ul><button class="btn" onclick="closeNews()">Понятно</button></div>`;
   const wi = R(wd[0]);
-  $('#t-home').innerHTML = voiceWarn() + news + `
+  $('#t-home').innerHTML = voiceWarn() + news + homeGameCards() + `
   <div class="card"><h2>Hello! Добро пожаловать</h2>
    <div class="mut">Главное — курс «Разговор на улице»: один урок в день, 90 уроков от нуля до уровня B1. Слова повторяйте в карточках, остальные вкладки — дополнительная практика.</div>
    <div style="margin-top:10px"><div class="row" style="justify-content:space-between"><b>Цель дня: ${Math.min(dx,g)} / ${g} очков</b><span class="mut">${dx>=g?'✅ выполнена':''}</span></div>
